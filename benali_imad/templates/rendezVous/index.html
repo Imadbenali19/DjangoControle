@@ -1,0 +1,67 @@
+{% extends "../layout.html" %}
+{% block content %}
+
+<a href="/addRendezVousForm/" >Fixer un rendez-vous ?</a><br><br>
+<br><br>
+<form method="get">
+<div class="input-group" style="justify-content:center">
+
+  <div class="form-outline" style="width:250px">
+    <input type="search" id="search" name="search" class="form-control" />
+    <label class="form-label" for="search">Search a patient's appointment</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    <i class="fas fa-search"></i>
+  </button>
+
+</div></form>
+
+<br><br>
+<h4 align="center">Liste des rendez-vous</h4>
+<table class="table table-striped">
+
+    <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Annulé?</th>
+            <th scope="col">Patient</th>
+            <th scope="col">Medecin</th>
+            <th scope="col" colspan="3">Actions</th>
+          </tr>
+        </thead>
+    <tbody>
+        {% for p in rendezVouss %}
+            <tr>
+              <td>{{p.id}}</td>
+              <td>{{p.date}}</td>
+              <td>{{p.annule}}</td>
+              <td>{{p.patient}}</td>
+              <td>{{p.medecin}}</td>
+              <td>
+                  <a href="/rendezVous/{{p.id}}" class="btn btn-sm btn-primary">Afficher</a> </td>
+                <td> <a href="/rendezVous/edit/{{p.id}}" class="btn btn-sm btn-info">Modifier</a></td>
+                  <td><a href="/rendezVous/delete/{{ p.id }}" class="btn btn-sm btn-warning" onclick="return confirm('Sur ?');">Supprimer</a>
+                </td>
+            </tr>
+          {% endfor %}
+    </tbody>
+</table>
+<!-- Pagination -->
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+        {% if rendezVouss.has_previous %}
+        <li class="page-item"><a href="?page=1" class="page-link">&laquo; first</a></li>
+        <li class="page-item"><a href="?page={{ rendezVouss.previous_page_number }}" class="page-link">previous</a></li>
+        {% endif %}
+      {% for i in nums %}
+      <li class="page-item"><a href="?page={{ forloop.counter }}" class="page-link">{{ forloop.counter }}</a></li>
+      {% endfor %}
+        {% if rendezVouss.has_next %}
+        <li class="page-item"><a href="?page={{ rendezVouss.next_page_number }}" class="page-link">next</a></li>
+        <li class="page-item"><a href="?page={{ rendezVouss.paginator.num_pages }}" class="page-link">last &raquo;</a></li>
+        {% endif %}
+      </ul>
+</nav>
+{% endblock content %}

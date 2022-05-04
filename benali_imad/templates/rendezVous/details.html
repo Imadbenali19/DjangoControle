@@ -1,0 +1,15 @@
+{% extends "../layout.html" %}
+
+{% block content %}
+{% if rendezVous %}
+<br><br>
+    <h3 align="center">Le Rendez-Vous a/aura lieu le <b style="color:blue">{{rendezVous.date}}</b>, <b style="color:blue">{% if rendezVous.annule == True %} est annulé ! {% else %} n'est pas annulé !  {% endif %}</b> pour le patient <b style="color:blue">{{rendezVous.patient}}</b>, et medecin <b style="color:blue">{{rendezVous.medecin}}</b></h3>
+<br><br>
+{% else %}
+<h2 align="center" style="color:red" >Aucun résultat!</h2>
+{% endif %}
+<center>
+    <a href="/rendezVous">Retour</a>
+</center>
+<br><br>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "../layout.html" %}
+
+{% block content %}
+<h1 align="center" style="color:red">Manage a Doctor ! </h1>
+<br><br>
+<center>
+
+    <form method="post" action="">
+        {% csrf_token %}
+<table>
+
+    {{form.as_table}}
+
+</table>
+    <br><br>
+<input type="submit" value="Submit" class="btn btn-primary ">
+
+</form>
+
+</center>
+
+{% endblock content %}
